@@ -1,11 +1,13 @@
 import React from "react";
 
 const TopListItem = ({crwaling}) => {
+    console.log(crwaling);
+
     return (
         <a className="article t" href="/issue/?idx=1103877" ss="issue_1103877">
-            <div className="thumb" background={"background-image:url(//i.aagag.com/mini/FsjNc.jpg);"}></div>
+            <div className="thumb" background={`url(${crwaling.thumbnail})`}></div>
             <span className="title">
-                {crwaling}
+                {crwaling.title}
                 <span className="cmt">(8)</span>
             </span>
             <span className="btmlayer">
@@ -52,7 +54,7 @@ const MainTopListTemplate = ({marginClass, crwalingList, err, loading}) => {
                 {!loading && crwalingList && (crwalingList.map(data =>
                     <TopListItem
                         crwaling={data}
-                        key={data}
+                        key={data.title}
                     >
                     </TopListItem>
                 ))}

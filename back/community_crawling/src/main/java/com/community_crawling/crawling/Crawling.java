@@ -1,10 +1,18 @@
 package com.community_crawling.crawling;
 
+import java.awt.image.BufferedImage;
+import java.io.FileOutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.imageio.ImageIO;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -42,8 +50,8 @@ public class Crawling {
 	}
 	
 	//커뮤니티 하나 더 분석 후 메서드로 쪼개기
-	public List<String> runSelenium(ChromeDriver driver, String url, int searchPageSize, int pageSize) throws Exception {
-		List<String> titleList = new ArrayList<String>();
+	public List<Map<String, Object>> runSelenium(ChromeDriver driver, String url, int searchPageSize, int pageSize) throws Exception {
+		List<Map<String, Object>> titleList = new ArrayList<Map<String, Object>>();
 		
 		try {
 			driver.get(url);
@@ -55,10 +63,12 @@ public class Crawling {
 						continue;
 					}
 					
+					Map<String, Object> crawlingDataMap = new HashMap<String, Object>();
+					
 					WebElement parent = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".table-divider")));
 					List<WebElement> contents = parent.findElements(By.cssSelector("span.title-link"));
 					
-					titleList.add(contents.get(j).getText());
+					crawlingDataMap.put("title", contents.get(j).getText());
 					
 					contents.get(j).click();
 					
@@ -72,16 +82,20 @@ public class Crawling {
 						if(pInnerContent.size() != 0) {
 							String tagName = pInnerContent.get(0).getTagName();
 							
-							System.out.println(tagName);
+//							System.out.println(tagName);
 							
 							if(tagName.equals("img")) {
-								System.out.println(pInnerContent.get(0).getAttribute("src"));
+								String src = pInnerContent.get(0).getAttribute("src");
+								
+								crawlingImageSaver(src, url);
 							}
 						}
 						
-						System.out.println(pList.get(k).getText());
-						System.out.println(pInnerContent.size());
+//						System.out.println(pList.get(k).getText());
+//						System.out.println(pInnerContent.size());
 					}
+					
+					titleList.add(crawlingDataMap);
 				}
 				
 				driver.get(url + "page=" + (i + 1));
@@ -95,4 +109,27 @@ public class Crawling {
 		
 		return titleList;
 	}
+	
+	public void crawlingImageSaver (String src, String url) {
+		String path = "C:\\CC";
+		
+		try {
+			HttpURLConnection conn = null;
+			URL imgUrl = new URL(src);
+			
+			String fileName = src.substring(src.lastIndexOf("/") + 1);
+			fileName = fileName.substring(0, fileName.lastIndexOf("."));
+			String extension = src.substring(src.lastIndexOf(".") + 1);
+			String referer = url.substring(0, url.lastIndexOf("?"));
+			
+			conn = (HttpURLConnection) imgUrl.openConnection();
+			conn.setRequestProperty("Referer", referer);
+			
+			BufferedImage buffImg = ImageIO.read(conn.getInputStream());
+			FileOutputStream fos = new FileOutputStream(path + "/" + fileName + "." + extension);
+			ImageIO.write(buffImg, extension, fos);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	};
 }

@@ -23,7 +23,7 @@ public class CrawlingController {
 		
 		ChromeDriver driver = crawling.getChromeDriver();
 		
-		responseMap.put("data", crawling.runSelenium(driver, "https://www.dogdrip.net/dogdrip?", 1, 5));
+		responseMap.put("data", crawling.runSelenium(driver, "https://www.dogdrip.net/dogdrip?", 1, 8));
 		
 		return responseMap;
 	}
