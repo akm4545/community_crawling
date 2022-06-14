@@ -20,14 +20,20 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import com.community_crawling.crawling.service.CrawlingService;
 
 @Component
 public class Crawling {
 	
 	@Value("${chromeDriver.path}")
 	private String chromeDriverPath;
+	
+	@Autowired
+	CrawlingService crawlingService; 
 	
 	public ChromeDriver getChromeDriver() throws Exception{
 		return createChromeDriver();
