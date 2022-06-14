@@ -22,7 +22,7 @@ public class MybatisConfig {
 		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
 		
-		Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:static/mybatis/*_Mapper.xml");
+		Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:mybatis/*_Mapper.xml");
 		
 		sessionFactory.setMapperLocations(res);
 		

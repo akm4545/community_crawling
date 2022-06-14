@@ -25,6 +25,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.community_crawling.crawling.service.CrawlingService;
+import com.community_crawling.crawling.vo.CrawlingDataVO;
+import com.community_crawling.crawling.vo.CrawlingFileVO;
 
 @Component
 public class Crawling {
@@ -56,9 +58,7 @@ public class Crawling {
 	}
 	
 	//커뮤니티 하나 더 분석 후 메서드로 쪼개기
-	public List<Map<String, Object>> runSelenium(ChromeDriver driver, String url, int searchPageSize, int pageSize) throws Exception {
-		List<Map<String, Object>> titleList = new ArrayList<Map<String, Object>>();
-		
+	public void runSelenium(ChromeDriver driver, String url, int searchPageSize, int pageSize) throws Exception {
 		try {
 			driver.get(url);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -68,13 +68,14 @@ public class Crawling {
 					if(j == 0) {
 						continue;
 					}
-					
-					Map<String, Object> crawlingDataMap = new HashMap<String, Object>();
+					List<CrawlingFileVO> fileList = new ArrayList<CrawlingFileVO>(); 
+					CrawlingDataVO dataVO = new CrawlingDataVO();
+					dataVO.setContent("");
 					
 					WebElement parent = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".table-divider")));
 					List<WebElement> contents = parent.findElements(By.cssSelector("span.title-link"));
 					
-					crawlingDataMap.put("title", contents.get(j).getText());
+					dataVO.setTitle(contents.get(j).getText());
 					
 					contents.get(j).click();
 					
@@ -87,23 +88,28 @@ public class Crawling {
 						
 						if(pInnerContent.size() != 0) {
 							String tagName = pInnerContent.get(0).getTagName();
-							
-//							System.out.println(tagName);
+							String tagElement = ""; 
 							
 							if(tagName.equals("img")) {
+								CrawlingFileVO fileVO = new CrawlingFileVO();
+								
 								String src = pInnerContent.get(0).getAttribute("src");
 								
-								crawlingImageSaver(src, url);
+								fileVO.setPath(crawlingImageSaver(src, url));
+								tagElement += "<img src=" + fileVO.getPath() + "/>";
+								dataVO.setContent(dataVO.getContent() + tagElement);
+								
+								fileList.add(fileVO);
 							}
+						}else {
+							//System.out.println(pContent.getText().equals(" "));
+							dataVO.setContent(dataVO.getContent() + pContent.getText());
 						}
-						
-//						System.out.println(pList.get(k).getText());
-//						System.out.println(pInnerContent.size());
 					}
+					dataVO.setFileList(fileList);
 					
-					titleList.add(crawlingDataMap);
+					crawlingService.insertCrawlingData(dataVO);
 				}
-				
 				driver.get(url + "page=" + (i + 1));
 			}
 		}catch (Exception e) {
@@ -112,20 +118,20 @@ public class Crawling {
 		}
 		
 		driver.quit();
-		
-		return titleList;
 	}
 	
-	public void crawlingImageSaver (String src, String url) {
+	public String crawlingImageSaver (String src, String url) {
 		String path = "C:\\CC";
+		String fileName = "";
+		String extension = "";
 		
 		try {
 			HttpURLConnection conn = null;
 			URL imgUrl = new URL(src);
 			
-			String fileName = src.substring(src.lastIndexOf("/") + 1);
+			fileName = src.substring(src.lastIndexOf("/") + 1);
 			fileName = fileName.substring(0, fileName.lastIndexOf("."));
-			String extension = src.substring(src.lastIndexOf(".") + 1);
+			extension = src.substring(src.lastIndexOf(".") + 1);
 			String referer = url.substring(0, url.lastIndexOf("?"));
 			
 			conn = (HttpURLConnection) imgUrl.openConnection();
@@ -137,5 +143,7 @@ public class Crawling {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		return path + "/" + fileName + "." + extension;
 	};
 }

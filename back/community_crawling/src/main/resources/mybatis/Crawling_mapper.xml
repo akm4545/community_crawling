@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.community_crawling.crawling.dao.CrawlingMapper">
-
+	
+	<insert id="insertCrawlingData" parameterType="com.community_crawling.crawling.vo.CrawlingDataVO" useGeneratedKeys="true" keyProperty="idx">
+		INSERT INTO crwaling_data (
+			idx,
+			title,
+			content,
+			registration_date
+		) VALUES (
+			default,
+			#{title},
+			#{content},
+			default
+		)
+	</insert>
+	
+	<insert id="insertCrawlingFile" parameterType="java.util.List">
+		INSERT INTO crwaling_file(
+			idx,
+			path,
+			registration_date,
+			crwaling_data_idx
+		)VALUES
+		<foreach collection="list" item="item" separator=",">
+		   (
+				default,
+				#{item.path},
+				default,
+				#{item.crwalingDataIdx}
+			)
+		</foreach>
+	</insert>
 </mapper>

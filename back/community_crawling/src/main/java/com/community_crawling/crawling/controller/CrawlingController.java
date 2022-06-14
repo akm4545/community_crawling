@@ -28,8 +28,9 @@ public class CrawlingController {
 		Map<String, Object> responseMap = new HashMap<String, Object>();
 		
 		ChromeDriver driver = crawling.getChromeDriver();
+		crawling.runSelenium(driver, "https://www.dogdrip.net/dogdrip?", 1, 8);
 		
-		responseMap.put("data", crawling.runSelenium(driver, "https://www.dogdrip.net/dogdrip?", 1, 8));
+		//responseMap.put("data", );
 		
 		return responseMap;
 	}
