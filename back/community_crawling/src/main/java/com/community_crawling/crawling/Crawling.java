@@ -40,43 +40,49 @@ public class Crawling {
 		return driver;
 	}
 	
-	public static void runSelenium(ChromeDriver driver, String url, int searchSize, int pageSize) throws Exception {
-		driver.get(url);
-		
+	public static void runSelenium(ChromeDriver driver, String url, int searchPageSize, int pageSize) throws Exception {		
 		try {
+			driver.get(url);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			
-			for(int i=0; i<2; i++) {
-				if(i == 0) {
-					continue;
-				}
-				
-				WebElement parent = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".table-divider")));
-				List<WebElement> contents = parent.findElements(By.cssSelector("span.title-link"));
-				
-				contents.get(i).click();
-				
-				WebElement contentParent = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div#article_1")));
-				List<WebElement> pList = contentParent.findElements(By.cssSelector("div.rhymix_content p"));
-				
-				for(int j=0; j<pList.size(); j++) {
-					WebElement pContent = pList.get(j);
-					List<WebElement> pInnerContent = pContent.findElements(By.cssSelector("*"));
-					
-					if(pInnerContent.size() != 0) {
-						String tagName = pInnerContent.get(0).getTagName();
-						
-						if(tagName.equals("img")) {
-							System.out.println(pInnerContent.get(0).getAttribute("src"));
-						}
+			for(int i=0; i<searchPageSize; i++) {
+				for(int j=0; j<pageSize; j++) {
+					if(j == 0) {
+						continue;
 					}
 					
-					System.out.println(pList.get(j).getText());
-					System.out.println(pInnerContent.size());
+					WebElement parent = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".table-divider")));
+					List<WebElement> contents = parent.findElements(By.cssSelector("span.title-link"));
+					
+					contents.get(j).click();
+					
+					WebElement contentParent = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div#article_1")));
+					List<WebElement> pList = contentParent.findElements(By.cssSelector("div.rhymix_content p"));
+					
+					for(int k=0; k<pList.size(); k++) {
+						WebElement pContent = pList.get(k);
+						List<WebElement> pInnerContent = pContent.findElements(By.cssSelector("*"));
+						
+						if(pInnerContent.size() != 0) {
+							String tagName = pInnerContent.get(0).getTagName();
+							
+							System.out.println(tagName);
+							
+							if(tagName.equals("img")) {
+								System.out.println(pInnerContent.get(0).getAttribute("src"));
+							}
+						}
+						
+						System.out.println(pList.get(k).getText());
+						System.out.println(pInnerContent.size());
+					}
 				}
+				
+				driver.get(url + "page=" + (i + 1));
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
+			driver.quit();
 		}
 		
 		driver.quit();

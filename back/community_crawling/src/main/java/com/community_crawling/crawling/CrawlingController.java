@@ -15,6 +15,6 @@ public class CrawlingController {
 	public void CrawlingRun() throws Exception {
 		ChromeDriver driver = crawling.getChromeDriver();
 		
-		crawling.runSelenium(driver, "https://www.dogdrip.net/dogdrip", 100, 21);
+		crawling.runSelenium(driver, "https://www.dogdrip.net/dogdrip?", 2, 20);
 	}
 }
