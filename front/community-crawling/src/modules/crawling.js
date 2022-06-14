@@ -24,7 +24,7 @@ const crawling = handleActions({
         ...state,
         crawlingList: data,
     }),
-    [CRAWLING_LIST_FAILURE]: (state, {payload: error}) => ({
+    [CRAWLING_LIST_FAILURE]: (state, {payload: {error}}) => ({
         ...state,
         error: error,
     }),

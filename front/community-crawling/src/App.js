@@ -1,13 +1,15 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes} from "../node_modules/react-router-dom/index";
 import MainTemplate from "./components/main/MainTemplate";
 
 const App = () => {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<MainTemplate></MainTemplate>}></Route>
-      </Routes>
+      <Router>
+        <Routes>
+          <Route path="/" element={<MainTemplate></MainTemplate>}></Route>
+        </Routes>
+      </Router>
     </>
   );
 };

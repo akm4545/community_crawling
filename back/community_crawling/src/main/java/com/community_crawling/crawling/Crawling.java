@@ -3,6 +3,7 @@ package com.community_crawling.crawling;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -40,19 +41,24 @@ public class Crawling {
 		return driver;
 	}
 	
-	public static void runSelenium(ChromeDriver driver, String url, int searchPageSize, int pageSize) throws Exception {		
+	//커뮤니티 하나 더 분석 후 메서드로 쪼개기
+	public List<String> runSelenium(ChromeDriver driver, String url, int searchPageSize, int pageSize) throws Exception {
+		List<String> titleList = new ArrayList<String>();
+		
 		try {
 			driver.get(url);
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			
 			for(int i=0; i<searchPageSize; i++) {
-				for(int j=0; j<pageSize; j++) {
+				for(int j=0; j<pageSize - 1; j++) {
 					if(j == 0) {
 						continue;
 					}
 					
 					WebElement parent = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".table-divider")));
 					List<WebElement> contents = parent.findElements(By.cssSelector("span.title-link"));
+					
+					titleList.add(contents.get(j).getText());
 					
 					contents.get(j).click();
 					
@@ -86,5 +92,7 @@ public class Crawling {
 		}
 		
 		driver.quit();
+		
+		return titleList;
 	}
 }

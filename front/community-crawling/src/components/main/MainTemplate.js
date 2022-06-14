@@ -5,6 +5,7 @@ import LeftSideTemplate from "../common/LeftSideTemplate";
 import RightSideTemplate from "../common/RightSideTemplate";
 import MainTopListTemplate from "./MainTopListTemplate";
 import MainBottomListTemplate from "./MainBottomListTemplate";
+import CrawlingDataContainer from "../../containers/CrawlingDataContainer";
 
 const MainTemplate = () => {
     return (
@@ -18,7 +19,7 @@ const MainTemplate = () => {
                 </div>
                 <div className="content">
                     <div className="clear">
-                        <MainTopListTemplate></MainTopListTemplate>
+                        <CrawlingDataContainer></CrawlingDataContainer>
                         <MainTopListTemplate marginClass="ml8"></MainTopListTemplate>
                         <div className="clear"></div>
                         <MainTopListTemplate></MainTopListTemplate>

@@ -7,7 +7,7 @@ const asyncRequestBase = async (method, url, body) => {
             body: JSON.stringify(body),
     });
     response = await response.json();
-    
+
     return response;
 };
 
