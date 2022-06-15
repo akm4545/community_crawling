@@ -14,4 +14,5 @@ public interface CrawlingMapper {
 
 	void insertCrawlingFile(List<CrawlingFileVO> fileList);
 
+	List<CrawlingDataVO> selectCrawlingDataList();
 }

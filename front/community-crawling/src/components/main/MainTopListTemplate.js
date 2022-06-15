@@ -1,11 +1,11 @@
 import React from "react";
 
 const TopListItem = ({crwaling}) => {
-    console.log(crwaling);
+    console.log(crwaling.fileList[0]);
 
     return (
         <a className="article t" href="/issue/?idx=1103877" ss="issue_1103877">
-            <div className="thumb" background={`url(${crwaling.thumbnail})`}></div>
+            <div className="thumb"  style={{background : `url("http://localhost:8080/image?path=${encodeURI(crwaling.fileList[0].path)}") no-repeat 50% 50% / cover`}}></div>
             <span className="title">
                 {crwaling.title}
                 <span className="cmt">(8)</span>

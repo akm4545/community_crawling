@@ -27,8 +27,10 @@ public class CrawlingController {
 	public Map<String, Object> CrawlingRun() throws Exception {
 		Map<String, Object> responseMap = new HashMap<String, Object>();
 		
-		ChromeDriver driver = crawling.getChromeDriver();
-		crawling.runSelenium(driver, "https://www.dogdrip.net/dogdrip?", 1, 8);
+		responseMap.put("data", crawlingService.selectCrawlingDataList());
+		
+		//ChromeDriver driver = crawling.getChromeDriver();
+		//crawling.runSelenium(driver, "https://www.dogdrip.net/dogdrip?", 1, 8);
 		
 		//responseMap.put("data", );
 		

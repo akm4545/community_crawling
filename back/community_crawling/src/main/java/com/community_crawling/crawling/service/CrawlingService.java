@@ -1,5 +1,7 @@
 package com.community_crawling.crawling.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,6 @@ public class CrawlingService {
 	CrawlingMapper crawlingDAO;
 
 	public void insertCrawlingData(CrawlingDataVO dataVO) {
-		System.out.println("save");
-		System.out.println(dataVO.toString());
-		
 		crawlingDAO.insertCrawlingData(dataVO);
 		
 		if(dataVO.getFileList() != null && dataVO.getFileList().size() != 0) {
@@ -25,5 +24,9 @@ public class CrawlingService {
 			
 			crawlingDAO.insertCrawlingFile(dataVO.getFileList());			
 		}
+	}
+
+	public List<CrawlingDataVO> selectCrawlingDataList() {
+		return crawlingDAO.selectCrawlingDataList();
 	} 
 }
