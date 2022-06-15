@@ -71,4 +71,14 @@
 		FROM crwaling_file
 		WHERE crwaling_data_idx = #{idx}
 	</select>
+	
+	<select id="selectCrawlingData" parameterType="com.community_crawling.crawling.vo.CrawlingDataVO" resultMap="crawlingData">
+		SELECT
+			idx,
+			title,
+			content,
+			registration_date
+		FROM crwaling_data
+		WHERE idx = #{idx}
+	</select>
 </mapper>

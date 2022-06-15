@@ -28,5 +28,9 @@ public class CrawlingService {
 
 	public List<CrawlingDataVO> selectCrawlingDataList() {
 		return crawlingDAO.selectCrawlingDataList();
+	}
+
+	public CrawlingDataVO selectCrawlingData(CrawlingDataVO dataVO) {
+		return crawlingDAO.selectCrawlingData(dataVO);
 	} 
 }

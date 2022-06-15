@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.community_crawling.crawling.Crawling;
 import com.community_crawling.crawling.service.CrawlingService;
+import com.community_crawling.crawling.vo.CrawlingDataVO;
 
 @RestController
 public class CrawlingController {
@@ -23,8 +24,8 @@ public class CrawlingController {
 	CrawlingService crawlingService; 
 	
 	@CrossOrigin("http://localhost:3000")
-	@GetMapping("/test")
-	public Map<String, Object> CrawlingRun() throws Exception {
+	@GetMapping("/crawling")
+	public Map<String, Object> CrawlingList() throws Exception {
 		Map<String, Object> responseMap = new HashMap<String, Object>();
 		
 		responseMap.put("data", crawlingService.selectCrawlingDataList());
@@ -36,4 +37,15 @@ public class CrawlingController {
 		
 		return responseMap;
 	}
+	
+	@CrossOrigin("http://localhost:3000")
+	@GetMapping("/crawling/{idx}")
+	public Map<String, Object> selectCrawling(CrawlingDataVO dataVO) throws Exception {
+		Map<String, Object> responseMap = new HashMap<String, Object>();
+		
+		responseMap.put("data", crawlingService.selectCrawlingData(dataVO));
+		
+		return responseMap; 
+	}
+	
 }
