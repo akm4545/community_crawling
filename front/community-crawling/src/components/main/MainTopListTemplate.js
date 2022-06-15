@@ -1,42 +1,45 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const TopListItem = ({crwaling}) => {
     console.log(crwaling.fileList[0]);
 
     return (
-        <a className="article t" href="/issue/?idx=1103877" ss="issue_1103877">
-            <div className="thumb"  style={{background : `url("http://localhost:8080/image?path=${encodeURI(crwaling.fileList[0].path)}") no-repeat 50% 50% / cover`}}></div>
-            <span className="title">
-                {crwaling.title}
-                <span className="cmt">(8)</span>
-            </span>
-            <span className="btmlayer">
-                <span className="byte">
-                    <u>0.4 MB</u>
+        <Link to={`/detail/${crwaling.idx}`}>
+            <a className="article t" href="/issue/?idx=1103877" ss="issue_1103877">
+                <div className="thumb"  style={{background : `url("http://localhost:8080/image?path=${encodeURI(crwaling.fileList[0].path)}") no-repeat 50% 50% / cover`}}></div>
+                <span className="title">
+                    {crwaling.title}
+                    <span className="cmt">(8)</span>
                 </span>
-                <span className="hit">
-                    <u>768</u>
+                <span className="btmlayer">
+                    <span className="byte">
+                        <u>0.4 MB</u>
+                    </span>
+                    <span className="hit">
+                        <u>768</u>
+                    </span>
+                    <span className="good">
+                        <u>
+                            <i className={["f_aicon", "navit"].join(" ")}></i>
+                            5
+                        </u>
+                    </span>
+                    <span className="good">
+                        <u>
+                            <i className={["f_aicon", "good"].join(" ")}></i>
+                            1
+                        </u>
+                    </span>
+                    <span className={["time", "right"].join(" ")}>
+                        <u>
+                            <i className={["f_aicon", "clock"].join(" ")}></i>
+                            7분전
+                        </u>
+                    </span>
                 </span>
-                <span className="good">
-                    <u>
-                        <i className={["f_aicon", "navit"].join(" ")}></i>
-                        5
-                    </u>
-                </span>
-                <span className="good">
-                    <u>
-                        <i className={["f_aicon", "good"].join(" ")}></i>
-                        1
-                    </u>
-                </span>
-                <span className={["time", "right"].join(" ")}>
-                    <u>
-                        <i className={["f_aicon", "clock"].join(" ")}></i>
-                        7분전
-                    </u>
-                </span>
-            </span>
-        </a>
+            </a>
+        </Link>
     );
 };
 

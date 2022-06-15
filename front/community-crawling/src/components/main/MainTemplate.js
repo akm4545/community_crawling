@@ -7,6 +7,7 @@ import MainTopListTemplate from "./MainTopListTemplate";
 import MainBottomListTemplate from "./MainBottomListTemplate";
 import CrawlingDataContainer from "../../containers/CrawlingDataContainer";
 
+// 추후 컨테이너 제작 후 교체
 const MainTemplate = () => {
     return (
         <>
@@ -15,7 +16,7 @@ const MainTemplate = () => {
                 <LeftSideTemplate></LeftSideTemplate>
                 <div className="block">
                     <div className="reload"></div>
-                    <div className="aa margin_r"></div>
+                    <div className={["aa", "margin_r"].join(" ")}></div>
                 </div>
                 <div className="content">
                     <div className="clear">
