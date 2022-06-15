@@ -26,8 +26,8 @@ const DetailBottomList = () => {
                     <tr>
                         <td className={["dot", "multi_open"].join(" ")}>
                             <div className="openarea">
-                                <div className="dropen" aria-describedby="tipsy" tabindex="0"></div>
-                                <div className="allopen" aria-describedby="tipsy" tabindex="0"></div>
+                                <div className="dropen" aria-describedby="tipsy" tabIndex="0"></div>
+                                <div className="allopen" aria-describedby="tipsy" tabIndex="0"></div>
                             </div>
                         </td>
                         <td>
@@ -97,10 +97,10 @@ const DetailBottomList = () => {
                     <tbody>
                         <tr>
                             <td>
-                                <input type="input" name="word" placeholder="검색" value=""/>
+                                <input type="input" name="word" placeholder="검색"/>
                             </td>
                             <td className="btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" className={["feather", "clofeather-searchck"].join(" ")}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={["feather", "clofeather-searchck"].join(" ")}>
                                     <circle cx="11" cy="11" r="8"></circle>
                                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                                 </svg>
