@@ -60,10 +60,7 @@ public class Crawling {
 		return driver;
 	}
 	
-	//커뮤니티 하나 더 분석 후 메서드로 쪼개기
-	public void runSelenium(ChromeDriver driver) throws Exception {
-		CrawlingInfo crawlingInfo = new CrawlingInfo().getDogdripTemplate();
-		
+	public void runSelenium(ChromeDriver driver, CrawlingInfo crawlingInfo) throws Exception {	
 		try {
 			driver.get(crawlingInfo.getUrl());
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
