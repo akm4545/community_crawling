@@ -5,9 +5,9 @@ const FooterTemplate = () => {
         <>
             <div id="footer">
                 <div className="cwarp">
-                    <p>Copyright 2011-2022 aagag.com All Right Reserved.</p>
-	                <p>게시글 삭제요청 : <a className="b" href="mailto:admin@aagag.com">E-mail</a> or <a className="b issue_alert">Request</a> or <a className="b" href="https://open.kakao.com/o/sEvFcATd" target="_blank">Kakao</a></p>
-	                <p>Request to delete posts email : <a className="b" href="mailto:admin@aagag.com">E-mail</a> or <a className="b issue_alert">Request</a></p>
+                    <p>Copyright All Right Reserved.</p>
+	                {/* <p>게시글 삭제요청 : <a className="b" href="mailto:admin@aagag.com">E-mail</a> or <a className="b issue_alert">Request</a> or <a className="b" href="https://open.kakao.com/o/sEvFcATd" target="_blank">Kakao</a></p> */}
+	                {/* <p>Request to delete posts email : <a className="b" href="mailto:admin@aagag.com">E-mail</a> or <a className="b issue_alert">Request</a></p> */}
                     <div className="bsidebar">
                         <u>사이드바 옵션 (Remove sidebar)</u>
                         <div>

@@ -50,7 +50,9 @@ const MainTopListTemplate = ({marginClass, crwalingList, err, loading}) => {
                 최신 이슈 모음
                 <div className="right">
                     {/* <a className={"no_read"}>안읽은글</a> */}
-                    <a href="https://aagag.com/issue/" className="more">더 보기</a>
+                    <Link to={`/list`}>
+                        <a className="more">더 보기</a>
+                    </Link>
                 </div>
             </div>
             <div className="list">
