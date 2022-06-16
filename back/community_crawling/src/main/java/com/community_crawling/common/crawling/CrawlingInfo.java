@@ -86,6 +86,7 @@ public class CrawlingInfo {
 		return infoVO;
 	}
 	
+	//DDos 로 인해 진입 불가
 	public CrawlingInfo getTheqooTemplate() {
 		CrawlingInfo infoVO = new CrawlingInfo();
 		
@@ -95,6 +96,20 @@ public class CrawlingInfo {
 		infoVO.setListParentNode("table.theqoo_board_table");
 		infoVO.setListItemNode("tr:not([notice]:not[notice_expand]");
 		infoVO.setContentParentNode("div#article_1");
+		infoVO.setContentItemNode("*");
+		
+		return infoVO;
+	}
+	
+	public CrawlingInfo getFmKoreaTemplate() {
+		CrawlingInfo infoVO = new CrawlingInfo();
+		
+		infoVO.setUrl("https://www.fmkorea.com/index.php?mid=best2&");
+		infoVO.setSearchPageSize(1);
+		infoVO.setPageSize(8);
+		infoVO.setListParentNode("div.fm_best_widget");
+		infoVO.setListItemNode("a.hotdeal_var8");
+		infoVO.setContentParentNode("div.xe_content");
 		infoVO.setContentItemNode("*");
 		
 		return infoVO;

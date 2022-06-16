@@ -51,9 +51,10 @@ public class Crawling {
 		ChromeOptions options = new ChromeOptions();
 		
 		options.addArguments("--start-maximized");
-		options.addArguments("--headless");
+		//options.addArguments("--headless");
 		options.addArguments("--idsable-gpu");
 		options.addArguments("--no-sandbox");
+		options.setExperimentalOption("useAutomationExtension", false);
 		
 		ChromeDriver driver = new ChromeDriver(options);
 		
@@ -62,7 +63,8 @@ public class Crawling {
 	
 	public void runSelenium(ChromeDriver driver, CrawlingInfo crawlingInfo) throws Exception {	
 		try {
-			driver.get(crawlingInfo.getUrl());
+			driver.get(crawlingInfo.getUrl() + "page=1");
+			
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			
 			for(int i=0; i<crawlingInfo.getSearchPageSize(); i++) {

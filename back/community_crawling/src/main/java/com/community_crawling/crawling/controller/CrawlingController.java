@@ -53,13 +53,14 @@ public class CrawlingController {
 	public void test() throws Exception{
 		ChromeDriver driver = crawling.getChromeDriver();
 		
-		CrawlingInfo dogdrip = new CrawlingInfo().getDogdripTemplate();
-		CrawlingInfo theqoo = new CrawlingInfo().getTheqooTemplate();
+		//CrawlingInfo dogdrip = new CrawlingInfo().getDogdripTemplate();
+		//CrawlingInfo theqoo = new CrawlingInfo().getTheqooTemplate();
+		CrawlingInfo fmKorea = new CrawlingInfo().getFmKoreaTemplate();
 	
 		List<CrawlingInfo> crawlingSiteList = new ArrayList<CrawlingInfo>();
 		
-		crawlingSiteList.add(dogdrip);
-		crawlingSiteList.add(theqoo);
+		//crawlingSiteList.add(dogdrip);
+		crawlingSiteList.add(fmKorea);
 		
 		for(int i=0; i<crawlingSiteList.size(); i++) {
 			crawling.runSelenium(driver, crawlingSiteList.get(i));				
