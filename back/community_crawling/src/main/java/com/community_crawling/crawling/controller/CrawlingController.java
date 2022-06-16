@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.community_crawling.crawling.Crawling;
+import com.community_crawling.common.crawling.Crawling;
 import com.community_crawling.crawling.service.CrawlingService;
 import com.community_crawling.crawling.vo.CrawlingDataVO;
 
@@ -27,10 +27,11 @@ public class CrawlingController {
 	public Map<String, Object> CrawlingList() throws Exception {
 		Map<String, Object> responseMap = new HashMap<String, Object>();
 		
-		responseMap.put("data", crawlingService.selectCrawlingDataList());
+		//responseMap.put("data", crawlingService.selectCrawlingDataList());
 		
-		//ChromeDriver driver = crawling.getChromeDriver();
+		ChromeDriver driver = crawling.getChromeDriver();
 		//crawling.runSelenium(driver, "https://www.dogdrip.net/dogdrip?", 1, 8);
+		crawling.runSelenium(driver);
 		
 		return responseMap;
 	}
