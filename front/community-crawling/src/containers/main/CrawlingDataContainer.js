@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MainTopListTemplate from "../components/main/MainTopListTemplate";
-import { crawlingList } from "../modules/crawling";
+import MainTopListTemplate from "../../components/main/MainTopListTemplate";
+import { crawlingList } from "../../modules/crawling";
 
 const CrawlingDataContainer = () => {
     const dispatch = useDispatch();

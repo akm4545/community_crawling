@@ -6,8 +6,8 @@ const TopListItem = ({crwaling}) => {
 
     return (
         <Link to={`/detail/${crwaling.idx}`}>
-            <a className="article t" href="/issue/?idx=1103877" ss="issue_1103877">
-                <div className="thumb"  style={{background : `url("http://localhost:8080/image?path=${encodeURI(crwaling.fileList[0].path)}") no-repeat 50% 50% / cover`}}></div>
+            <a className={["article", "t"].join(" ")} ss="issue_1103877">
+                <div className="thumb"  style={{background : `url("http://localhost:8080/image?path=${encodeURI(crwaling.fileList[0] ? crwaling.fileList[0].path : "")}") no-repeat 50% 50% / cover`}}></div>
                 <span className="title">
                     {crwaling.title}
                     <span className="cmt">(8)</span>

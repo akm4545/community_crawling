@@ -1,11 +1,15 @@
 import React from "react";
 
-const DetailContentTemplate = () => {
+const DetailContentTemplate = ({data, loading, err}) => {
+    console.log(data);
+
     return (
         <>
-            <h1 className="title">중환자실에 있는 오토바이 운전자.gif</h1>
-            <div id="vContent">
-                <p>........
+            <h1 className="title">
+                {data.title}
+            </h1>
+            <div id="vContent" dangerouslySetInnerHTML={{__html: data.content}}>
+                {/* <p>........
                     <br/>
                 </p>
                 <p>
@@ -41,7 +45,7 @@ const DetailContentTemplate = () => {
                 <div className={["stag", "ytb"].join(" ")} q="ysSGiLvzinM" style={{width: "724px", height: "470.894px"}}>
                     <iframe src="https://www.youtube.com/embed/ysSGiLvzinM" frameBorder="0" allowFullScreen=""></iframe>
                 </div>
-                <p></p>
+                <p></p> */}
             </div>
         </>
     );

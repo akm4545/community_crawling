@@ -34,6 +34,9 @@ public class Crawling {
 	@Value("${chromeDriver.path}")
 	private String chromeDriverPath;
 	
+	@Value("${crawling.image.url}")
+	private String imageUrl;
+	
 	@Autowired
 	CrawlingService crawlingService; 
 	
@@ -96,7 +99,7 @@ public class Crawling {
 								String src = pInnerContent.get(0).getAttribute("src");
 								
 								fileVO.setPath(crawlingImageSaver(src, url));
-								tagElement += "<img src=" + fileVO.getPath() + "/>";
+								tagElement += "<img src=" + imageUrl + fileVO.getPath() + "/>";
 								dataVO.setContent(dataVO.getContent() + tagElement);
 								
 								fileList.add(fileVO);
@@ -144,6 +147,6 @@ public class Crawling {
 			e.printStackTrace();
 		}
 		
-		return path + "/" + fileName + "." + extension;
+		return fileName + "." + extension;
 	};
 }

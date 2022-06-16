@@ -17,15 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class ImageController {
 	
+	private String folderPath = "C:\\CC/";
+	
 	@CrossOrigin("http://localhost:3000")
 	@GetMapping("/image")
 	public ResponseEntity<byte[]> image(String path) throws Exception {
+		
 		try {
 			HttpHeaders header = new HttpHeaders();
 
 			header.setContentType(MediaType.IMAGE_PNG);
 
-			return new ResponseEntity<byte[]>(IOUtils.toByteArray(new FileInputStream(new File(path))), header,
+			return new ResponseEntity<byte[]>(IOUtils.toByteArray(new FileInputStream(new File(folderPath + path))), header,
 					HttpStatus.CREATED);
 		} catch (Exception e) {
 			System.out.println("이미지 경로를 찾을 수 없습니다.");

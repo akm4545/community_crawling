@@ -3,13 +3,13 @@ import HeaderTemplate from "../common/HeaderTemplate";
 import LeftSideTemplate from "../common/LeftSideTemplate";
 import RightSideTemplate from "../common/RightSideTemplate";
 import FooterTemplate from "../common/FooterTemplate";
-import DetailContentTemplate from "./DetailContentTemplate";
 import Heart from "./Heart";
 import DetailBottomMenu from "./DetailBottomMenu";
 import DetailInfo from "./DetailInfo";
 import DetailComment from "./DetailComment";
 import DetailCommentWrite from "./DetailCommentWrite";
 import DetailBottomList from "./DetailBottomList";
+import CrawlingDataDetailContainer from "../../containers/detail/CrwalingDataDetailContainer";
 
 const DetailMainTemplate = () => {
     return (
@@ -22,7 +22,7 @@ const DetailMainTemplate = () => {
                     <div className={["aa", "margin_r"].join(" ")}></div>
                 </div>
                 <div id="content">
-                    <DetailContentTemplate></DetailContentTemplate>
+                    <CrawlingDataDetailContainer></CrawlingDataDetailContainer>
                     <Heart></Heart>
                     <DetailBottomMenu></DetailBottomMenu>
                     <DetailInfo></DetailInfo>

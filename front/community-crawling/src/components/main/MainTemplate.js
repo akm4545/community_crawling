@@ -5,7 +5,7 @@ import LeftSideTemplate from "../common/LeftSideTemplate";
 import RightSideTemplate from "../common/RightSideTemplate";
 import MainTopListTemplate from "./MainTopListTemplate";
 import MainBottomListTemplate from "./MainBottomListTemplate";
-import CrawlingDataContainer from "../../containers/CrawlingDataContainer";
+import CrawlingDataContainer from "../../containers/main/CrawlingDataContainer";
 
 // 추후 컨테이너 제작 후 교체
 const MainTemplate = () => {
